@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Loan EMI Calculator - Calculate Your Monthly EMI</title>
     <meta name="description" content="Easily calculate your home loan EMI with our user-friendly calculator. Adjust loan amount, interest rate, and tenure for accurate results.">
-    <meta name="keywords" content="Home Loan EMI Calculator, Loan EMI, Home Loan, Loan Repayment, Mortgage Calculator">
+    <meta name="keywords" content="Home Loan EMI Calculator, Loan EMI, Home Loan, Mortgage Calculator, Loan Repayment, Home Loan Interest, EMI Calculation">
     <meta name="author" content="Your Company Name">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -23,66 +23,50 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 255, 0.1);
             border: 2px solid #007bff;
         }
-        .slider-container {
-            margin-bottom: 30px;
-        }
-        .slider {
-            width: 100%;
-        }
-        .slider-output {
-            display: inline-block;
+        h1, h2, h5 {
             font-weight: bold;
-            margin-left: 10px;
             color: #007bff;
         }
-        .btn-primary {
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 5px;
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
+        .editable {
             border: none;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-        .spacing {
-            margin-top: 10px;
-        }
-        h2, h5 {
+            background: none;
             font-weight: bold;
             color: #007bff;
+            width: auto;
+            display: inline;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="calculator-container">
-            <h1 class="fw-bold">Home Loan EMI Calculator</h1>
-            <p>Estimate your monthly loan payments with precision.</p>
-            <div class="mb-4 slider-container">
-                <label class="form-label">Loan Amount: <span class="slider-output" id="loanAmountOutput">₹25,00,000</span></label>
-                <input type="range" class="form-range slider" id="loanAmount" min="100000" max="100000000" value="2500000">
+            <h1>Home Loan EMI Calculator</h1>
+            <p>Estimate your monthly home loan EMI with our easy-to-use calculator. Adjust the loan amount, tenure, and interest rate for accurate EMI calculations.</p>
+            <div class="mb-4">
+                <label class="form-label">Loan Amount: ₹<span id="loanAmountOutput" class="editable" contenteditable="true">25,00,000</span></label>
+                <input type="range" class="form-range" id="loanAmount" min="100000" max="100000000" value="2500000">
             </div>
-            <div class="mb-4 slider-container">
-                <label class="form-label">Tenure (Years): <span class="slider-output" id="tenureOutput">30</span></label>
-                <input type="range" class="form-range slider" id="tenure" min="1" max="30" value="30">
+            <div class="mb-4">
+                <label class="form-label">Tenure (Years): <span id="tenureOutput" class="editable" contenteditable="true">30</span></label>
+                <input type="range" class="form-range" id="tenure" min="1" max="30" value="30">
             </div>
-            <div class="mb-4 slider-container">
-                <label class="form-label">Interest Rate (% P.A.): <span class="slider-output" id="interestRateOutput">8.7%</span></label>
-                <input type="range" class="form-range slider" id="interestRate" min="0.5" max="15" step="0.1" value="8.7">
+            <div class="mb-4">
+                <label class="form-label">Interest Rate (% P.A.): <span id="interestRateOutput" class="editable" contenteditable="true">8.7%</span></label>
+                <input type="range" class="form-range" id="interestRate" min="0.5" max="15" step="0.1" value="8.7">
             </div>
             <hr>
             <h2 id="emiOutput">₹19,578</h2>
             <p>Estimated Monthly EMI</p>
-            <h5 class="spacing" id="principalOutput">Principal Amount: ₹25,00,000</h5>
-            <h5 class="spacing" id="interestOutput">Interest Amount: ₹45,48,188</h5>
-            <h5 class="spacing" id="totalAmountOutput">Total Amount Payable: ₹70,48,188</h5>
-            <button class="btn btn-primary mt-3">Get Loan Assistance</button>
+            <h5 id="principalOutput">Principal Amount: ₹25 lakh</h5>
+            <h5 id="interestOutput">Interest Amount: ₹45.48 lakh</h5>
+            <h5 id="totalAmountOutput">Total Amount Payable: ₹70.48 lakh</h5>
         </div>
     </div>
     <script>
+        function formatIndianNumber(num) {
+            return new Intl.NumberFormat('en-IN').format(num);
+        }
+        
         function calculateEMI() {
             let P = parseFloat(document.getElementById('loanAmount').value);
             let r = parseFloat(document.getElementById('interestRate').value) / 12 / 100;
@@ -90,23 +74,28 @@
             let EMI = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
             let totalAmount = EMI * n;
             let interestAmount = totalAmount - P;
-            document.getElementById('emiOutput').innerText = `₹${Math.round(EMI).toLocaleString()}`;
-            document.getElementById('principalOutput').innerText = `Principal Amount: ₹${P.toLocaleString()}`;
-            document.getElementById('interestOutput').innerText = `Interest Amount: ₹${Math.round(interestAmount).toLocaleString()}`;
-            document.getElementById('totalAmountOutput').innerText = `Total Amount Payable: ₹${Math.round(totalAmount).toLocaleString()}`;
+            
+            document.getElementById('emiOutput').innerText = `₹${formatIndianNumber(Math.round(EMI))}`;
+            document.getElementById('principalOutput').innerText = `Principal Amount: ₹${formatIndianNumber(P)}`;
+            document.getElementById('interestOutput').innerText = `Interest Amount: ₹${formatIndianNumber(Math.round(interestAmount))}`;
+            document.getElementById('totalAmountOutput').innerText = `Total Amount Payable: ₹${formatIndianNumber(Math.round(totalAmount))}`;
         }
         
-        document.getElementById('loanAmount').addEventListener('input', function() {
-            document.getElementById('loanAmountOutput').innerText = `₹${parseInt(this.value).toLocaleString()}`;
-            calculateEMI();
+        document.querySelectorAll('.editable').forEach(element => {
+            element.addEventListener('input', function() {
+                let numericValue = this.innerText.replace(/[^0-9.]/g, '');
+                let targetId = this.id.replace('Output', '');
+                document.getElementById(targetId).value = numericValue;
+                calculateEMI();
+            });
         });
-        document.getElementById('tenure').addEventListener('input', function() {
-            document.getElementById('tenureOutput').innerText = this.value;
-            calculateEMI();
-        });
-        document.getElementById('interestRate').addEventListener('input', function() {
-            document.getElementById('interestRateOutput').innerText = `${this.value}%`;
-            calculateEMI();
+        
+        document.querySelectorAll('input[type=range]').forEach(element => {
+            element.addEventListener('input', function() {
+                let outputId = this.id + 'Output';
+                document.getElementById(outputId).innerText = this.id === 'interestRate' ? `${this.value}%` : formatIndianNumber(this.value);
+                calculateEMI();
+            });
         });
         
         calculateEMI();
