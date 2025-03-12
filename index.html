@@ -3,102 +3,457 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Loan EMI Calculator - Calculate Your Monthly EMI</title>
-    <meta name="description" content="Easily calculate your home loan EMI with our user-friendly calculator. Adjust loan amount, interest rate, and tenure for accurate results.">
-    <meta name="keywords" content="Home Loan EMI Calculator, Loan EMI, Home Loan, Mortgage Calculator, Loan Repayment, Home Loan Interest, EMI Calculation">
-    <meta name="author" content="Your Company Name">
+    <meta name="description" content="Get the best home loan offers with low interest rates. Apply online today!">
+    <meta name="keywords" content="home loan, mortgage, low interest loan, housing finance">
+    <meta name="author" content="Your Bank">
+    <title>Home Loan - NexaHome</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
+
         body {
-            background-color: #f0f8ff;
+            background-color: rgba(211, 203, 244, 0.54);
             color: #333;
             font-family: 'Arial', sans-serif;
         }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: rgba(43, 20, 150, 0.85) !important; /* Matches logo background */
+            padding-top: 15px;
+            padding-bottom: 15px;
+            min-height: 80px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Brand Logo and Text */
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: white !important;
+        }
+
+        /* Logo Image */
+        .navbar-brand img {
+            height: 50px; /* Adjust for better visibility */
+            margin-right: 10px; /* Space between logo and text */
+        }
+
+        /* Navbar Links */
+        .nav-link {
+            color: white !important;
+            font-size: 1.1rem;
+            margin-right: 10px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .nav-link:hover {
+            color: #FFD700 !important; /* Gold hover effect */
+        }
+
+        /* Login Button */
+        .btn-primary {
+            background-color: #FFD700;
+            border-color: #FFD700;
+            color: #2B1496;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background-color: #FFC107;
+            border-color: #FFC107;
+        }
         .calculator-container {
-            background: #ffffff;
+            background: rgba(211, 203, 244, 0.54);
             border-radius: 8px;
             padding: 25px;
             max-width: 600px;
             margin: 50px auto;
             box-shadow: 0px 4px 10px rgba(0, 0, 255, 0.1);
-            border: 2px solid #007bff;
+            border: 2px solid rgba(43,20,150,255);
         }
-        h1, h2, h5 {
+        h2, h5 ,h3 {
             font-weight: bold;
-            color: #007bff;
+            color: rgba(43,20,150,255);
         }
         .editable {
             border: none;
             background: none;
             font-weight: bold;
-            color: #007bff;
+            color: rgba(43,20,150,255);
             width: auto;
             display: inline;
         }
+        #chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 2px solid rgba(43,20,150,255);
+        }
+        #chatbot-header {
+            background: rgba(43,20,150,255);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        #chatbot-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+        }
+        #chatbot-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        #chatbot-input input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+        }
+        #chatbot-input button {
+            padding: 10px;
+            background: rgba(43,20,150,255);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .accordion-item {
+            background-color: rgba(43,20,150,255) !important;
+            color: white !important;
+            border: 1px solid rgba(211, 203, 244, 0.54);
+        }
+
+        .accordion-button {
+            background-color: rgba(43,20,150,255) !important;
+            color: white !important;
+            border: none;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: rgba(43,20,150,255) !important;
+            color: white !important;
+        }
+
+        .accordion-body {
+            background-color: rgba(43,20,150,255) !important;
+            color: white !important;
+        }
+
+        /* Added spacing between heading and accordion */
+        h2.text-center {
+            margin-bottom: 30px; /* Adjust this value if needed */
+        }        
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="calculator-container">
-            <h1>Home Loan EMI Calculator</h1>
-            <p>Estimate your monthly home loan EMI with our easy-to-use calculator. Adjust the loan amount, tenure, and interest rate for accurate EMI calculations.</p>
-            <div class="mb-4">
-                <label class="form-label">Loan Amount: ₹<span id="loanAmountOutput" class="editable" contenteditable="true">25,00,000</span></label>
-                <input type="range" class="form-range" id="loanAmount" min="100000" max="100000000" value="2500000">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="logo.jpg" alt="NexaHome Logo"> NexaHome
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#calculator">Calculator</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+                <a href="#login" class="btn btn-primary ms-3">Log In</a>
             </div>
-            <div class="mb-4">
-                <label class="form-label">Tenure (Years): <span id="tenureOutput" class="editable" contenteditable="true">30</span></label>
-                <input type="range" class="form-range" id="tenure" min="1" max="30" value="30">
+        </div>
+    </nav>
+
+    
+
+    
+    <header style="background-color: rgba(43,20,150,255);" class="text-white text-center p-5">
+        <h1>Affordable Home Loans – Secure Your Dream Home Today</h1>
+        <p>
+            Looking for a low-interest home loan with flexible repayment options? We offer hassle-free mortgage solutions to help first-time buyers and homeowners upgrade with ease. Enjoy a seamless approval process and turn your homeownership dreams into reality. Apply now and get closer to owning your perfect home!
+        </p>
+    </header>
+    
+    <section id="features" class="container my-5">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <h3>Low Interest Rates</h3>
+                <p>Enjoy the lowest interest rates in the market.</p>
             </div>
-            <div class="mb-4">
-                <label class="form-label">Interest Rate (% P.A.): <span id="interestRateOutput" class="editable" contenteditable="true">8.7%</span></label>
-                <input type="range" class="form-range" id="interestRate" min="0.5" max="15" step="0.1" value="8.7">
+            <div class="col-md-4 text-center">
+                <h3>Quick Processing</h3>
+                <p>Get approval within 24 hours.</p>
             </div>
-            <hr>
-            <h2 id="emiOutput">₹19,578</h2>
-            <p>Estimated Monthly EMI</p>
-            <h5 id="principalOutput">Principal Amount: ₹25 lakh</h5>
-            <h5 id="interestOutput">Interest Amount: ₹45.48 lakh</h5>
-            <h5 id="totalAmountOutput">Total Amount Payable: ₹70.48 lakh</h5>
+            <div class="col-md-4 text-center">
+                <h3>Minimal Documentation</h3>
+                <p>Hassle-free paperwork to make your process smooth.</p>
+            </div>
+        </div>
+    </section>
+    
+    <div class="calc">
+        <div class="container mt-5">
+            <div class="row">
+                <!-- Left Side - EMI Calculator -->
+                <div class="col-md-6">
+                    <div class="calculator-container">
+                        <h2>Home Loan EMI Calculator</h2>
+                        <p>Estimate your monthly home loan EMI with our easy-to-use calculator. Adjust the loan amount, tenure, and interest rate for accurate EMI calculations.</p>
+                        <div class="mb-3">
+                            <label class="form-label">Loan Amount: ₹<span id="loanAmountOutput">25,00,000</span></label>
+                            <input type="range" class="form-range" id="loanAmount" min="100000" max="100000000" value="2500000">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tenure (Years): <span id="tenureOutput">30</span></label>
+                            <input type="range" class="form-range" id="tenure" min="1" max="30" value="30">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Interest Rate (% P.A.): <span id="interestRateOutput">8.7%</span></label>
+                            <input type="range" class="form-range" id="interestRate" min="0.5" max="15" step="0.1" value="8.7">
+                        </div>
+                        <hr>
+                        <h2 id="emiOutput">₹19,578</h2>
+                        <p>Estimated Monthly EMI</p>
+                        <h5 id="principalOutput">Principal Amount: ₹25 lakh</h5>
+                        <h5 id="interestOutput">Interest Amount: ₹45.48 lakh</h5>
+                        <h5 id="totalAmountOutput">Total Amount Payable: ₹70.48 lakh</h5>
+                    </div>
+                </div>
+                <!-- Right Side - Bar Graph -->
+                <div class="col-md-6 d-flex align-items-center flex-column">
+                    <canvas id="emiChart" width="400" height="400"></canvas>
+                </div>
+            </div>
+            <div class="mt-4">
+                <h3>Understanding the EMI Calculation</h3>
+                <p>The graph represents the breakup of your loan repayment, showing the principal amount and interest paid over time.</p>
+                <p>The Home Loan EMI is calculated using the formula:</p>
+                <p><strong>EMI = [P × r × (1 + r)^n] / [(1 + r)^n - 1]</strong></p>
+                <p>Where:</p>
+                <ul>
+                    <li>P = Principal loan amount</li>
+                    <li>r = Monthly interest rate (Annual Rate / 12 / 100)</li>
+                    <li>n = Loan tenure in months</li>
+                </ul>
+            </div>
+        </div>
+    
+        
+    </div>
+    
+    
+
+    
+    <!-- <div id="chatbot">
+        <div id="chatbot-header">Chat with VANDE</div>
+        <div id="chatbot-messages"></div>
+        <div id="chatbot-input">
+            <input type="text" id="chat-input" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div> -->
+
+    <!-- FaQ Questions -->
+
+    <section id="faq" class="container my-5">
+        <h2 class="text-center mb-4">Frequently Asked Questions for Housing Loans</h2>
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                        What is a Home Loan?
+                    </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+A home loan is a financial product provided by banks or financial institutions that helps individuals purchase a residential property. The loan is repaid over time with interest, usually in monthly installments.
+                    </div>
+                </div>
+            </div>
+    
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                        How do I apply for a Home Loan?
+                    </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        <ol>
+                            <li>Sign Up / Register</li>
+                            <li>Fill in the home loan application form</li>
+                            <li>Upload required documents</li>
+                            <li>Pay processing fee</li>
+                            <li>Get loan approval</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                        What are the eligibility criteria for a Home Loan?
+                    </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        <ul>
+                            <li>Applicant must be between 21-65 years old</li>
+                            <li>Stable source of income</li>
+                            <li>Good credit score (preferably 750+)</li>
+                            <li>Minimum work experience of 2 years</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                        What documents are required for a Home Loan?
+                    </button>
+                </h2>
+                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        <ul>
+                            <li>Identity Proof (Aadhar, PAN, Passport)</li>
+                            <li>Address Proof (Utility Bills, Ration Card)</li>
+                            <li>Income Proof (Salary Slips, ITR, Bank Statements)</li>
+                            <li>Property Documents</li>
+                            <li>Loan Agreement</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                        What is the maximum loan tenure?
+                    </button>
+                </h2>
+                <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        The maximum loan tenure can go up to 30 years depending on the borrower's eligibility and lender policies.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container-fluid contact-section">
+        <div class="row">
+            <!-- Contact Us Section -->
+            <div class="col-md-6">
+                <h5>Contact Us</h5>
+                <a href="#">Service Request / Queries</a>
+                <a href="#">Helpline Number</a>
+                <a href="#">Locate Us</a>
+                <a href="#">Grievance Redressal</a>
+                <a href="#">HDFC Bank Ltd Deposit Centers</a>
+                <h5 class="mt-3">HDFC Bank Ltd Home Loan App</h5>
+            </div>
+    
+            <!-- Support Section -->
+            <div class="col-md-6">
+                <h5>Support</h5>
+                <p>Give A Missed Call</p>
+                <p><span class="support-icon">📞</span> <strong>+91-9289200017</strong></p>
+                <p>Send SMS</p>
+                <p><span class="support-icon">💬</span> HDFCHOME To 56767</p>
+                <p>WhatsApp</p>
+                <p><span class="support-icon">🟢</span> Chat With Us</p>
+            </div>
         </div>
     </div>
-    <script>
-        function formatIndianNumber(num) {
-            return new Intl.NumberFormat('en-IN').format(num);
-        }
+    
+    
         
-        function calculateEMI() {
-            let P = parseFloat(document.getElementById('loanAmount').value);
-            let r = parseFloat(document.getElementById('interestRate').value) / 12 / 100;
-            let n = parseFloat(document.getElementById('tenure').value) * 12;
-            let EMI = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-            let totalAmount = EMI * n;
-            let interestAmount = totalAmount - P;
+        <script>
+            function formatIndianNumber(num) {
+                return new Intl.NumberFormat('en-IN').format(num);
+            }
             
-            document.getElementById('emiOutput').innerText = `₹${formatIndianNumber(Math.round(EMI))}`;
-            document.getElementById('principalOutput').innerText = `Principal Amount: ₹${formatIndianNumber(P)}`;
-            document.getElementById('interestOutput').innerText = `Interest Amount: ₹${formatIndianNumber(Math.round(interestAmount))}`;
-            document.getElementById('totalAmountOutput').innerText = `Total Amount Payable: ₹${formatIndianNumber(Math.round(totalAmount))}`;
-        }
-        
-        document.querySelectorAll('.editable').forEach(element => {
-            element.addEventListener('input', function() {
-                let numericValue = this.innerText.replace(/[^0-9.]/g, '');
-                let targetId = this.id.replace('Output', '');
-                document.getElementById(targetId).value = numericValue;
-                calculateEMI();
+            function calculateEMI() {
+                let P = parseFloat(document.getElementById('loanAmount').value);
+                let r = parseFloat(document.getElementById('interestRate').value) / 12 / 100;
+                let n = parseFloat(document.getElementById('tenure').value) * 12;
+                let EMI = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+                let totalAmount = EMI * n;
+                let interestAmount = totalAmount - P;
+                
+                document.getElementById('emiOutput').innerText = `₹${formatIndianNumber(Math.round(EMI))}`;
+                document.getElementById('principalOutput').innerText = `Principal Amount: ₹${formatIndianNumber(P)}`;
+                document.getElementById('interestOutput').innerText = `Interest Amount: ₹${formatIndianNumber(Math.round(interestAmount))}`;
+                document.getElementById('totalAmountOutput').innerText = `Total Amount Payable: ₹${formatIndianNumber(Math.round(totalAmount))}`;
+                updateChart(P, interestAmount);
+            }
+            
+            function updateChart(principal, interest) {
+                emiChart.data.labels = ['Principal Amount', 'Interest Amount'];
+                emiChart.data.datasets[0].data = [principal, interest];
+                emiChart.update();
+            }
+            
+            document.querySelectorAll('input[type=range]').forEach(element => {
+                element.addEventListener('input', function() {
+                    let outputId = this.id + 'Output';
+                    document.getElementById(outputId).innerText = this.id === 'interestRate' ? `${this.value}%` : formatIndianNumber(this.value);
+                    calculateEMI();
+                });
             });
-        });
-        
-        document.querySelectorAll('input[type=range]').forEach(element => {
-            element.addEventListener('input', function() {
-                let outputId = this.id + 'Output';
-                document.getElementById(outputId).innerText = this.id === 'interestRate' ? `${this.value}%` : formatIndianNumber(this.value);
-                calculateEMI();
+            
+            var ctx = document.getElementById('emiChart').getContext('2d');
+            var emiChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Loan Breakdown',
+                        data: [],
+                        backgroundColor: ['rgba(43,20,150,255)', '#ff5733'],
+                        borderColor: ['#0056b3', '#c70039'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { title: { display: true, text: 'Amount (₹)' } }
+                    }
+                }
             });
-        });
+            
+            calculateEMI();
         
-        calculateEMI();
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
 </body>
 </html>
+
+
