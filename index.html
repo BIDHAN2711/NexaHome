@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Get the best home loan offers with low interest rates. Apply online today!">
     <meta name="keywords" content="home loan, mortgage, low interest loan, housing finance">
-    <meta name="author" content="Your Bank">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-powered home loan chatbot to assist with all your queries.">
+    <meta name="keywords" content="home loan, mortgage, AI chatbot, loan assistant">
+    <meta name="author" content="NexaHome">
     <title>Home Loan - NexaHome</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -26,30 +32,37 @@
             color: #333;
             font-family: 'Arial', sans-serif;
         }
+        /* Contact info Styling */
+        .contact-info {
+        background-color: transparent; /* Light gray background */
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .phone-icon {
+        font-size: 20px;
+        color: red;
+    }
+
+    .flicker-text {
+        color: red;
+        animation: flicker 1.5s infinite alternate;
+    }
+
+    @keyframes flicker {
+        0% { color: red; }
+        50% { color: rgb(208, 7, 195); }
+        100% { color: rgba(43,20,150,255); }
+    }
 
         /* Navbar Styling */
         .navbar {
             background-color: rgba(43, 20, 150, 0.85) !important;
-            padding-top: 15px;
-            padding-bottom: 15px;
-            min-height: 80px;
+            padding: 10px 15px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        /* Navbar Toggler (Button) */
-        .navbar-toggler {
-            background-color: rgba(170, 154, 245, 0.85) !important; /* Custom color */
-            border: none;
-            padding: 8px 10px;
-            border-radius: 5px;
-        }
-
-        .navbar-toggler:focus,
-        .navbar-toggler:hover {
-            background-color: rgba(140, 124, 220, 0.85) !important; /* Slightly darker hover effect */
-        }
-
-        /* Brand Logo and Text */
+        /* Navbar Brand */
         .navbar-brand {
             display: flex;
             align-items: center;
@@ -75,19 +88,64 @@
             color: #FFD700 !important;
         }
 
+        /* Search Bar */
+        .search-bar {
+            flex-grow: 1;
+            max-width: 400px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            outline: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .search-bar input:focus {
+            border-color: #FFD700;
+            box-shadow: 0px 0px 5px rgba(255, 215, 0, 0.8);
+        }
+
+        /* Mobile Search Bar Inside Navbar */
+        .mobile-search {
+            padding: 10px;
+        }
+
         /* Login Button */
-        .btn-primary {
+        .btn-login {
             background-color: #FFD700;
             border-color: #FFD700;
             color: #2B1496;
             padding: 10px 20px;
             font-size: 1rem;
             border-radius: 8px;
+            text-align: center;
+            display: block;
+            width: 100%;
+            max-width: 150px;
         }
 
-        .btn-primary:hover {
+        .btn-login:hover {
             background-color: #FFC107;
             border-color: #FFC107;
+        }
+
+        /* Align Login Button */
+        .login-container {
+            display: flex;
+            align-items: center;
+        }
+
+        @media (max-width: 991px) {
+            .search-bar {
+                display: none; /* Hide desktop search bar */
+            }
+            .login-container {
+                justify-content: center;
+                margin-top: 10px;
+            }
         }
         .calculator-container {
             background: rgba(211, 203, 244, 0.54);
@@ -110,48 +168,103 @@
             width: auto;
             display: inline;
         }
-        #chatbot {
+
+        
+        /* Apply now Button */
+        .apply-btn {
+        background-color: #f4d41f; 
+        color: black;
+        border: 2px solid #f4d41f;
+        padding: 12px 30px;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+        display: inline-block;
+    }
+
+    .apply-btn:hover {
+        background-color: rgba(43,20,150,255);
+        color: white;
+        border-color: white;
+    }
+
+
+        /* Chat bot */
+        .chat-button {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 300px;
-            height: 400px;
+            width: 80px; /* Increased size */
+            height: 80px; /* Increased size */
+            border-radius: 40%;
+            background: url('logoNexa.png') no-repeat center;
+            background-size: cover;
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+        .chat-button:hover {
+            transform: scale(1.1);
+        }
+        .chat-box {
+            position: fixed;
+            bottom: -500px; /* Initially hidden */
+            right: 20px;
+            width: 350px; /* Increased width */
+            height: 500px; /* Increased height */
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px 10px 0 0;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
-            border: 2px solid rgba(43,20,150,255);
+            z-index: 1100;
+            transition: bottom 0.4s ease-in-out;
         }
-        #chatbot-header {
-            background: rgba(43,20,150,255);
+        .chat-header {
+            background: rgba(140, 124, 220, 0.85);
             color: white;
-            padding: 10px;
+            padding: 12px;
             text-align: center;
             font-weight: bold;
+            cursor: pointer;
         }
-        #chatbot-messages {
-            flex: 1;
+        .chat-content {
+            flex-grow: 1;
             padding: 10px;
             overflow-y: auto;
-        }
-        #chatbot-input {
             display: flex;
+            flex-direction: column;
+        }
+        .chat-message {
+            background: #f1f1f1;
+            padding: 8px;
+            border-radius: 5px;
+            margin: 5px 0;
+            max-width: 80%;
+        }
+        .user-message {
+            background: rgba(140, 124, 220, 0.85);
+            color: white;
+            align-self: flex-end;
+        }
+        .chat-input-container {
+            display: flex;
+            padding: 10px;
             border-top: 1px solid #ddd;
         }
-        #chatbot-input input {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            outline: none;
+        .chat-input {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
-        #chatbot-input button {
-            padding: 10px;
-            background: rgba(43,20,150,255);
+        .chat-send {
+            background: rgba(140, 124, 220, 0.85);
             color: white;
             border: none;
+            padding: 8px 15px;
+            margin-left: 5px;
             cursor: pointer;
+            border-radius: 5px;
         }
         .accordion-item {
             background-color: rgba(43,20,150,255) !important;
@@ -214,15 +327,42 @@
     </style>
 </head>
 <body>
+
+<!-- Bootstrap Container for Contact Info -->
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-auto">
+            <div class="contact-info d-flex align-items-center">
+                <i class="fas fa-phone-alt phone-icon"></i>
+                <span class="flicker-text">+91 9999999999 - For New Home Loans</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!--Navigation bar-->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
+            <!-- Logo -->
             <a class="navbar-brand" href="#">
                 <img src="logo.jpg" alt="NexaHome Logo"> NexaHome
             </a>
+
+            <!-- Desktop Search Bar -->
+            <div class="search-bar mx-3 d-none d-lg-block">
+                <input type="text" class="form-control" placeholder="Search for loans, rates, EMI...">
+            </div>
+
+            <!-- Toggler for Mobile -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <!-- Navbar Links -->
             <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="mobile-search d-lg-none">
+                    <input type="text" class="form-control" placeholder="Search for loans, rates, EMI...">
+                </div>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
@@ -230,7 +370,11 @@
                     <li class="nav-item"><a class="nav-link" href="#calculator">Calculator</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
-                <a href="#login" class="btn btn-primary ms-3">Log In</a>
+                
+                <!-- Login Button (Properly aligned) -->
+                <div class="login-container ms-lg-3">
+                    <a href="#login" class="btn btn-login">Log In</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -239,10 +383,21 @@
 
     
     <header style="background-color: rgba(43,20,150,255);" class="text-white text-center p-5">
-        <h1>Affordable Home Loans – Secure Your Dream Home Today</h1>
-        <p>
-            Looking for a low-interest home loan with flexible repayment options? We offer hassle-free mortgage solutions to help first-time buyers and homeowners upgrade with ease. Enjoy a seamless approval process and turn your homeownership dreams into reality. Apply now and get closer to owning your perfect home!
-        </p>
+        <div class="container">
+            <h1 class="fw-bold">Affordable Home Loans – <span class="text-warning">Secure Your Dream Home Today</span></h1>
+            <p class="mt-3">
+                Looking for a <strong>low-interest home loan</strong> with <strong>flexible repayment options</strong>? 
+                We offer <strong>hassle-free mortgage solutions</strong> to help <strong>first-time buyers</strong> and 
+                homeowners upgrade with ease. Enjoy a seamless approval process and turn your 
+                <strong>homeownership dreams into reality</strong>. Apply now and get closer to 
+                <span class="text-warning">owning your perfect home!</span>
+            </p>
+            
+            <!-- Apply Now Button -->
+            <div class="mt-4">
+                <a href="#apply" class="btn btn-lg fw-bold apply-btn">Apply Online</a>
+            </div>
+        </div>
     </header>
     
     <section id="features" class="container my-5">
@@ -313,16 +468,19 @@
     </div>
     
     
-
+    <!-- Chat bot -->
     
-    <!-- <div id="chatbot">
-        <div id="chatbot-header">Chat with VANDE</div>
-        <div id="chatbot-messages"></div>
-        <div id="chatbot-input">
-            <input type="text" id="chat-input" placeholder="Type a message...">
-            <button onclick="sendMessage()">Send</button>
+    <div class="chat-button" onclick="toggleChat()"></div>
+    <div class="chat-box" id="chatBox">
+        <div class="chat-header" onclick="toggleChat()">Home Loan Chat</div>
+        <div class="chat-content" id="chatContent">
+            <div class="chat-message">How can I help you with Home Loan?</div>
         </div>
-    </div> -->
+        <div class="chat-input-container">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
+            <button class="chat-send" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
 
     <!-- FaQ Questions -->
 
@@ -448,6 +606,21 @@ A home loan is a financial product provided by banks or financial institutions t
     
         
         <script>
+            // Close the navbar when clicking outside
+        document.addEventListener("click", function (event) {
+            let navbar = document.querySelector(".navbar-collapse");
+            let toggler = document.querySelector(".navbar-toggler");
+
+            if (!toggler.contains(event.target) && !navbar.contains(event.target)) {
+                let bsCollapse = new bootstrap.Collapse(navbar, {
+                    toggle: false
+                });
+                bsCollapse.hide();
+            }
+        });
+
+
+
             function formatIndianNumber(num) {
                 return new Intl.NumberFormat('en-IN').format(num);
             }
@@ -505,16 +678,122 @@ A home loan is a financial product provided by banks or financial institutions t
             calculateEMI();
 
 
-            // Close the navbar when clicking outside
-        document.addEventListener("click", function (event) {
-            let navbar = document.querySelector(".navbar-collapse");
-            let toggler = document.querySelector(".navbar-toggler");
+            // Close the navbar when clicking outside and on the navbar toggle
+            document.addEventListener("click", function (event) {
+    let navbar = document.querySelector(".navbar-collapse");
+    let toggler = document.querySelector(".navbar-toggler");
 
-            if (!toggler.contains(event.target) && !navbar.contains(event.target)) {
-                let bsCollapse = new bootstrap.Collapse(navbar, {
-                    toggle: false
+    if (navbar.classList.contains("show") && (!navbar.contains(event.target) || toggler.contains(event.target))) {
+        let bsCollapse = new bootstrap.Collapse(navbar, {
+            toggle: false
+        });
+        bsCollapse.hide();
+    }
+});
+
+
+        // Chat bot full function with API 
+
+        function toggleChat() {
+            const chatBox = document.getElementById("chatBox");
+            const button = document.querySelector(".chat-button");
+
+            if (chatBox.style.bottom === "-500px" || chatBox.style.bottom === "") {
+                chatBox.style.bottom = "0";
+                button.style.opacity = "0"; // Smooth fade out
+            } else {
+                chatBox.style.bottom = "-500px";
+                button.style.opacity = "1"; // Smooth fade in
+            }
+        }
+
+        function sendMessage() {
+            const inputField = document.getElementById("chatInput");
+            const message = inputField.value.trim();
+            if (message === "") return;
+
+            displayMessage(message, "user-message");
+            inputField.value = "";
+
+            setTimeout(async () => {
+                const botResponse = await getBotResponse(message);
+                displayMessage(botResponse, "bot-message");
+            }, 1000);
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        }
+
+        function displayMessage(text, className = "") {
+            const chatContent = document.getElementById("chatContent");
+            const messageDiv = document.createElement("div");
+            messageDiv.className = "chat-message " + className;
+            messageDiv.textContent = text;
+            chatContent.appendChild(messageDiv);
+            chatContent.scrollTop = chatContent.scrollHeight;
+        }
+
+        async function getBotResponse(userInput) {
+            const useChatGPT = true; // Toggle between ChatGPT & Home Loan API
+
+            if (useChatGPT) {
+                return await getChatGPTResponse(userInput);
+            } else {
+                return await getLoanInfo(userInput);
+            }
+        }
+
+        async function getChatGPTResponse(userInput) {
+            const apiKey = "YOUR_OPENAI_API_KEY"; // Replace with OpenAI API key
+            const apiUrl = "https://api.openai.com/v1/chat/completions";
+
+            const requestBody = {
+                model: "gpt-3.5-turbo",
+                messages: [
+                    { role: "system", content: "You are a home loan assistant." },
+                    { role: "user", content: userInput }
+                ],
+                temperature: 0.7
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify(requestBody)
                 });
-                bsCollapse.hide();
+
+                const data = await response.json();
+                return data.choices[0].message.content;
+            } catch (error) {
+                return "Sorry, I’m unable to fetch the response right now.";
+            }
+        }
+
+        async function getLoanInfo(userInput) {
+            const apiUrl = "https://your-home-loan-api.com/loan-details"; // Replace with actual API URL
+
+            try {
+                const response = await fetch(`${apiUrl}?query=${encodeURIComponent(userInput)}`);
+                const data = await response.json();
+                return data.response || "I'm sorry, I couldn't find information on that.";
+            } catch (error) {
+                return "There was an issue retrieving loan details. Please try again later.";
+            }
+        }
+
+        document.addEventListener("click", function(event) {
+            const chatBox = document.getElementById("chatBox");
+            const button = document.querySelector(".chat-button");
+            if (!chatBox.contains(event.target) && !button.contains(event.target)) {
+                chatBox.style.bottom = "-500px";
+                button.style.opacity = "1";
             }
         });
         
