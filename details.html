@@ -152,25 +152,26 @@
             <div class="tab-content mt-3">
                 <!-- Resident Indian Form -->
                 <div id="resident" class="tab-pane fade show active">
-                    <form>
+                    <form  action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="b1ecb501-020c-48b6-acd8-ce8a719b175d">
                         <div class="mb-3">
                             <label>Name*</label>
-                            <input type="text" class="form-control" placeholder="Enter Name" required>
+                            <input type="text" name="name" class="form-control" placeholder="Enter Name" required>
                         </div>
                         <div class="mb-3">
                             <label>City*</label>
-                            <input type="text" class="form-control" placeholder="Enter City" required>
+                            <input type="text" name="city" class="form-control" placeholder="Enter City" required>
                         </div>
                         <div class="mb-3">
                             <label>Mobile No*</label>
                             <div class="input-group">
                                 <span class="input-group-text">+91</span>
-                                <input type="tel" class="form-control" placeholder="Enter Mobile No." required>
+                                <input type="tel"  name="mobile" class="form-control" placeholder="Enter Mobile No." required>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label>Email*</label>
-                            <input type="email" class="form-control" placeholder="Enter Email" required>
+                            <input type="email" name="Email" class="form-control" placeholder="Enter Email" required>
                         </div>
                         <button type="submit" class="btn btn-primary">SUBMIT</button>
                     </form>
@@ -178,14 +179,15 @@
 
                 <!-- Non-Resident Indian Form -->
                 <div id="non-resident" class="tab-pane fade">
-                    <form>
+                    <form action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="b1ecb501-020c-48b6-acd8-ce8a719b175d">
                         <div class="mb-3">
                             <label>Name*</label>
-                            <input type="text" class="form-control" placeholder="Enter Name" required>
+                            <input type="text" name="Name" class="form-control" placeholder="Enter Name" required>
                         </div>
                         <div class="mb-3">
                             <label>Country*</label>
-                            <select class="form-control" required>
+                            <select class="form-control" name="Country" required>
                                 <option value="" disabled selected>Select</option>
                                 <option value="USA">USA</option>
                                 <option value="UK">UK</option>
@@ -199,12 +201,12 @@
                             <label>Mobile No*</label>
                             <div class="input-group">
                                 <span class="input-group-text">+91</span>
-                                <input type="tel" class="form-control" placeholder="Enter Mobile No." required>
+                                <input type="tel" name="mobile" class="form-control" placeholder="Enter Mobile No." required>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label>Email*</label>
-                            <input type="email" class="form-control" placeholder="Enter Email" required>
+                            <input type="email" name="Email" class="form-control" placeholder="Enter Email" required>
                         </div>
                         <button type="submit" class="btn btn-primary">SUBMIT</button>
                     </form>
