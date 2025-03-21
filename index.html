@@ -71,9 +71,30 @@
             color: white !important;
         }
 
+        /* Fullscreen Image Styling */
+        #fullscreenContainer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        #fullscreenContainer img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
         .navbar-brand img {
-            height: 50px;
+            height: 60px;
             margin-right: 10px;
+            border-radius: 40px;
         }
 
         /* Navbar Links */
@@ -266,6 +287,40 @@
             cursor: pointer;
             border-radius: 5px;
         }
+
+        /* Interst */
+
+        .interest-rate-section {
+            text-align: center;
+            padding: 20px;
+        }
+        .interest-rate-section h1
+        {
+            color: rgba(43,20,150,255);
+            font-weight: bold;
+        }
+
+        .rate-table {
+            max-width: 1000px;
+            background: rgba(211, 203, 244, 0.54);
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin: 10px auto;
+        }
+        .rate-header {
+            background: rgba(43,20,150,255);
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            border-radius: 5px 5px 0 0;
+        }
+        .table th, .table td {
+            padding: 8px;
+            font-size: 14px;
+            text-align: center;
+        }
+
         .accordion-item {
             background-color: rgba(43,20,150,255) !important;
             color: white !important;
@@ -344,9 +399,16 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <!-- Logo -->
-            <a class="navbar-brand" href="#">
-                <img src="logo.jpg" alt="NexaHome Logo"> NexaHome
-            </a>
+            <!-- Clickable Image -->
+    <a class="navbar-brand">
+        <img src="logo.png" alt="NexaHome Logo"  class="me-2" onclick="openFullscreen(this)">
+        NexaHomes
+    </a>
+
+    <!-- Fullscreen Image Modal -->
+    <div id="fullscreenContainer" onclick="closeFullscreen()">
+        <img id="fullscreenImage" src="" alt="Fullscreen View">
+    </div>
 
             <!-- Desktop Search Bar -->
             <div class="search-bar mx-3 d-none d-lg-block">
@@ -485,6 +547,61 @@
         </div>
     </div>
 
+        <!-- Interest part -->
+
+        <div class="interest-rate-section">
+            <h1>Home Loan Interest Rates</h1>
+            <p>All rates are benchmarked to Policy Repo Rate. Current applicable Repo Rate = <strong>6.25%</strong></p>
+        
+            <div class="container">
+                <!-- Special Housing Loan Rates -->
+                <div class="rate-table">
+                    <div class="rate-header">
+                        Special Housing Loan Rates for Salaried & Self Employed (Professionals & Non-Professionals)
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Loan Slab</th>
+                                    <th>Interest Rates (% p.a.)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>For All Loans*</strong></td>
+                                    <td>Policy Repo Rate + 2.45% to 3.30% = <strong>8.70% to 9.55%</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        
+                <!-- Standard Housing Loan Rates -->
+                <div class="rate-table">
+                    <div class="rate-header">
+                        Standard Housing Loan Rates for Salaried & Self Employed (Professionals & Non-Professionals)
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Loan Slab</th>
+                                    <th>Interest Rates (% p.a.)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>For All Loans*</strong></td>
+                                    <td>Policy Repo Rate + 3.15% to 3.70% = <strong>9.40% to 9.95%</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     <!-- FaQ Questions -->
 
     <section id="faq" class="container my-5">
@@ -498,7 +615,7 @@
                 </h2>
                 <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-A home loan is a financial product provided by banks or financial institutions that helps individuals purchase a residential property. The loan is repaid over time with interest, usually in monthly installments.
+                        A home loan is a financial product provided by banks or financial institutions that helps individuals purchase a residential property. The loan is repaid over time with interest, usually in monthly installments.
                     </div>
                 </div>
             </div>
@@ -576,6 +693,8 @@ A home loan is a financial product provided by banks or financial institutions t
 
     <div class="container-fluid contact-section">
         <div class="row">
+
+            
             <!-- Contact Us Section -->
             <div class="col-md-6">
                 <strong><h4>Contact Us</strong></h4>
@@ -694,6 +813,16 @@ A home loan is a financial product provided by banks or financial institutions t
     }
 });
 
+//Navbar image open close
+function openFullscreen(image) {
+            document.getElementById("fullscreenImage").src = image.src; // Set image source
+            document.getElementById("fullscreenContainer").style.display = "flex"; // Show modal
+        }
+
+        function closeFullscreen() {
+            document.getElementById("fullscreenContainer").style.display = "none"; // Hide modal
+        }
+
 
         // Chat bot full function with API 
 
@@ -799,6 +928,9 @@ A home loan is a financial product provided by banks or financial institutions t
                 button.style.opacity = "1";
             }
         });
+
+       
+
         
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
