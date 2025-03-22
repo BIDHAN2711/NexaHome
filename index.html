@@ -9,7 +9,11 @@
     <meta name="description" content="AI-powered home loan chatbot to assist with all your queries.">
     <meta name="keywords" content="home loan, mortgage, AI chatbot, loan assistant">
     <meta name="author" content="NexaHome">
+
     <title>Home Loan - NexaHome</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -55,7 +59,7 @@
         100% { color: rgba(43,20,150,255); }
     }
 
-        /* Navbar Styling */
+         /* Navbar Styling */
         .navbar {
             background-color: rgba(43, 20, 150, 0.85) !important;
             padding: 10px 15px;
@@ -69,26 +73,6 @@
             font-weight: bold;
             font-size: 1.5rem;
             color: white !important;
-        }
-
-        /* Fullscreen Image Styling */
-        #fullscreenContainer {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        #fullscreenContainer img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
         .navbar-brand img {
@@ -107,6 +91,26 @@
 
         .nav-link:hover {
             color: #FFD700 !important;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            background-color: rgba(43, 20, 150, 0.95);
+            display: none;
+            position: absolute;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-item {
+            color: white !important;
+        }
+
+        .dropdown-item:hover {
+            background-color: #FFD700 !important;
+            color: #2B1496 !important;
         }
 
         /* Search Bar */
@@ -159,6 +163,26 @@
             align-items: center;
         }
 
+        /* Fullscreen Image Styling */
+        #fullscreenContainer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        #fullscreenContainer img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
         @media (max-width: 991px) {
             .search-bar {
                 display: none; /* Hide desktop search bar */
@@ -168,6 +192,9 @@
                 margin-top: 10px;
             }
         }
+
+
+        /* Calculator */
         .calculator-container {
             background: rgba(211, 203, 244, 0.54);
             border-radius: 8px;
@@ -348,36 +375,69 @@
             margin-bottom: 30px; /* Adjust this value if needed */
         } 
         
-        .contact-section {
-            background-color: rgba(43, 20, 150, 0.85); /* Updated background color */
+         /* Contact section  */
+
+         .contact-section {
+            background-color: rgba(43,20,150,255);
             color: white;
-            padding: 40px 30px;
+            padding: 25px 25px;
         }
+        
         .contact-section h5 {
+            color: white;
             font-weight: bold;
             margin-bottom: 15px;
+            font-size: 20px;
         }
         .contact-section a {
             color: white;
             text-decoration: none;
             display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
+            margin-bottom: 10px;
+            font-size: 16px;
         }
         .contact-section a:hover {
             text-decoration: underline;
         }
         .contact-section p {
-            margin-bottom: 5px;
-            font-size: 14px;
+            margin-bottom: 8px;
+            font-size: 16px;
         }
         .support-info {
             display: flex;
             align-items: center;
         }
         .support-icon {
-            margin-right: 8px;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        .company-address {
             font-size: 18px;
+            font-weight: bold;
+            margin-top: 12px;
+            border-left: 4px solid white;
+            padding-left: 12px;
+        }
+        .map-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        .services-section {
+            display: flex;
+            flex-direction: column;
+            text-align: left; /* Changed from center to left */
+            padding-left: 15px;
+        }
+        .services-list {
+            list-style: none;
+            padding: 0;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+        .services-list li {
+            margin-bottom: 8px;
         }
     </style>
 </head>
@@ -389,57 +449,67 @@
         <div class="col-md-auto">
             <div class="contact-info d-flex align-items-center">
                 <i class="fas fa-phone-alt phone-icon"></i>
-                <span class="flicker-text">+91 9999999999 - For New Home Loans</span>
+                <span class="flicker-text">+91 9839782220 - For New Home Loans</span>
             </div>
         </div>
     </div>
 </div>
 
-    <!--Navigation bar-->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <!-- Logo -->
-            <!-- Clickable Image -->
-    <a class="navbar-brand">
-        <img src="logo.png" alt="NexaHome Logo"  class="me-2" onclick="openFullscreen(this)">
-        NexaHomes
-    </a>
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <!-- Clickable Image -->
+<a class="navbar-brand">
+    <img src="logo.png" alt="NexaHome Logo"  class="me-2" onclick="openFullscreen(this)">
+    NexaHomes
+</a>
 
-    <!-- Fullscreen Image Modal -->
-    <div id="fullscreenContainer" onclick="closeFullscreen()">
-        <img id="fullscreenImage" src="" alt="Fullscreen View">
-    </div>
+<!-- Fullscreen Image Modal -->
+<div id="fullscreenContainer" onclick="closeFullscreen()">
+    <img id="fullscreenImage" src="" alt="Fullscreen View">
+</div>
+        
+        <!-- Desktop Search Bar -->
+        <div class="search-bar mx-3 d-none d-lg-block">
+            <input type="text" class="form-control" placeholder="Search for loans, rates, EMI...">
+        </div>
 
-            <!-- Desktop Search Bar -->
-            <div class="search-bar mx-3 d-none d-lg-block">
+        <!-- Toggler for Mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="mobile-search d-lg-none">
                 <input type="text" class="form-control" placeholder="Search for loans, rates, EMI...">
             </div>
-
-            <!-- Toggler for Mobile -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Navbar Links -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="mobile-search d-lg-none">
-                    <input type="text" class="form-control" placeholder="Search for loans, rates, EMI...">
-                </div>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#calculator">Calculator</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                </ul>
-                
-                <!-- Login Button (Properly aligned) -->
-                <div class="login-container ms-lg-3">
-                    <a href="#login" class="btn btn-login">Log In</a>
-                </div>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <!-- Services Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown">Services</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#home-loan">Home Loan</a></li>
+                        <li><a class="dropdown-item" href="#personal-loan">Personal Loan</a></li>
+                        <li><a class="dropdown-item" href="#business-loan">Business Loan</a></li>
+                        <li><a class="dropdown-item" href="#car-loan">Car Loan (New & Old)</a></li>
+                        <li><a class="dropdown-item" href="#solar-system">Solar System</a></li>
+                        <li><a class="dropdown-item" href="#commercial-vehicle">Commercial Vehicle</a></li>
+                        <li><a class="dropdown-item" href="#mercenary-loan">All Type of Mercenary Loan</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#calculator">Calculator</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+            
+            <!-- Login Button (Properly aligned) -->
+            <div class="login-container ms-lg-3">
+                <a href="#login" class="btn btn-login">Log In</a>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
     
 
@@ -696,30 +766,51 @@
 
             
             <!-- Contact Us Section -->
-            <div class="col-md-6">
-                <strong><h4>Contact Us</strong></h4>
-                <a href="#">Service Request / Queries</a>
-                <a href="#">Helpline Number</a>
-                <a href="#">Locate Us</a>
-                <a href="#">Grievance Redressal</a>
-                <a href="#">NexaHome Ltd Deposit Centers</a>
-                <h4 class="mt-3"><strong>NexaHome Ltd Home Loan App</strong></h4>
+    <div class="container-fluid contact-section">
+        <div class="row">
+            
+            <div class="col-md-4">
+                <h5>Contact Us</h5>
+                <a href="#">📞 Service Request / Queries</a>
+                <a href="#">📢 Helpline Number</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=21-W2,+Damodar+Nagar,+Opp.+Sarojani+Medical+Centre" target="_blank">
+                    <img src="https://static.vecteezy.com/system/resources/previews/012/871/377/original/google-maps-icon-google-product-illustration-free-png.png" alt="Google Maps" class="map-icon"> Locate Us
+                </a>
+                <a href="#">📩 Grievance Redressal</a>
+                <a href="#">🏦 NexaHome Ltd Deposit Centers</a>
+                <h5 class="mt-3"><strong>Nexa Homes Fintech Pvt. Ltd.</strong></h5>
+                <p class="company-address">📍 21-W2, Damodar Nagar, Opp. Sarojani Medical Centre</p>
+            </div>
+    
+            <!-- Services Section (Aligned Left) -->
+            <div class="col-md-4 services-section">
+                <h5>🌟 Our Services</h5>
+                <ul class="services-list">
+                    <li>🏠 Home Loan</li>
+                    <li>🚛 Commercial Vehicle Loan</li>
+                    <li>💰 Personal Loan</li>
+                    <li>🔧 All Type Mercenary Loan</li>
+                    <li>📈 Business Loan</li>
+                    <li>☀️ Solar System Financing</li>
+                    <li>🚗 Car Loan (New & Old)</li>
+                </ul>
             </div>
     
             <!-- Support Section -->
-            <div class="col-md-6">
-                <h4><strong>Support</h4></strong>
-                <p>Give A Missed Call</p>
+            <div class="col-md-4">
+                <h5>Support</h5>
+                <p>📞 Give A Missed Call</p>
                 <p class="support-info">
-                    <i class="bi bi-telephone-fill support-icon"></i> <strong>+91-9999999999</strong>
+                    <i class="bi bi-telephone-fill support-icon"></i> <strong>+91-9839782220</strong>
                 </p>
-                <p>Send SMS</p>
+                <p>📩 Send SMS</p>
                 <p class="support-info">
-                    <i class="bi bi-chat-text-fill support-icon"></i> NexaHome To 56767
+                    <i class="bi bi-chat-text-fill support-icon"></i> NexaHome To 9839782220
                 </p>
                 <p>WhatsApp</p>
                 <p class="support-info">
-                    <i class="bi bi-whatsapp support-icon text-success"></i> Chat With Us
+                    <i class="bi bi-whatsapp support-icon text-success"></i> 
+                    <a href="https://wa.me/919839782220" class="text-success" target="_blank">Chat With Us</a>
                 </p>
             </div>
         </div>
@@ -728,18 +819,30 @@
     
         
         <script>
-            // Close the navbar when clicking outside
-        document.addEventListener("click", function (event) {
-            let navbar = document.querySelector(".navbar-collapse");
-            let toggler = document.querySelector(".navbar-toggler");
 
-            if (!toggler.contains(event.target) && !navbar.contains(event.target)) {
-                let bsCollapse = new bootstrap.Collapse(navbar, {
-                    toggle: false
-                });
-                bsCollapse.hide();
-            }
+
+            //open and close the logo image
+        function openFullscreen(image) {
+            document.getElementById("fullscreenImage").src = image.src; // Set image source
+            document.getElementById("fullscreenContainer").style.display = "flex"; // Show modal
+        }
+
+        function closeFullscreen() {
+            document.getElementById("fullscreenContainer").style.display = "none"; // Hide modal
+        }
+
+            // Close the navbar when clicking outside and on the navbar toggle
+        document.addEventListener("click", function (event) {
+    let navbar = document.querySelector(".navbar-collapse");
+    let toggler = document.querySelector(".navbar-toggler");
+
+    if (navbar.classList.contains("show") && (!navbar.contains(event.target) || toggler.contains(event.target))) {
+        let bsCollapse = new bootstrap.Collapse(navbar, {
+            toggle: false
         });
+        bsCollapse.hide();
+    }
+});
 
 
 
