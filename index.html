@@ -337,6 +337,45 @@
             border-radius: 5px;
         }
 
+        .loan-options {
+         display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+        }
+
+.loan-button {
+    padding: 8px 12px;
+    background: rgba(43,20,150,255);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.loan-button:hover {
+    background: white;
+    color: black;
+}
+
+        /* Styling for both buttons */
+        .styled-button {
+            padding: 8px 12px;
+        background: rgba(43,20,150,255);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+        
+        }
+        
+        .styled-button:hover {
+            background: white;
+            color: black;
+        }
+
         /* Interst */
 
         .interest-rate-section {
@@ -804,7 +843,7 @@
                 </a>
                 <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nexahomes.kanpur@gmail.com" target="_blank">📩 Chat via Gmail</a>
                 <h5 class="mt-3"><strong>Nexa Homes Fintech Pvt. Ltd.</strong></h5>
-                <p class="company-address">📍 21-W2, Damodar Nagar, Opp. Sarojani Medical Centre, kanpur</p>
+                <p class="company-address">📍 21-W2, Damodar Nagar, Opp. Sarojani Medical Centre, Kanpur</p>
             </div>
     
             <!-- Services Section (Aligned Left) -->
@@ -878,7 +917,7 @@
 });
 
 
-
+            //Calculator Functioning
             function formatIndianNumber(num) {
                 return new Intl.NumberFormat('en-IN').format(num);
             }
@@ -960,110 +999,159 @@ function openFullscreen(image) {
         }
 
 
-        // Chat bot full function with API 
+        // Chat bot basic Functioning
 
         function toggleChat() {
-            const chatBox = document.getElementById("chatBox");
-            const button = document.querySelector(".chat-button");
+        const chatBox = document.getElementById("chatBox");
+        const button = document.querySelector(".chat-button");
 
-            if (chatBox.style.bottom === "-500px" || chatBox.style.bottom === "") {
-                chatBox.style.bottom = "0";
-                button.style.opacity = "0"; // Smooth fade out
-            } else {
-                chatBox.style.bottom = "-500px";
-                button.style.opacity = "1"; // Smooth fade in
-            }
+        if (chatBox.style.bottom === "-500px" || chatBox.style.bottom === "") {
+            chatBox.style.bottom = "0";
+            button.style.opacity = "0"; // Hide button
+        } else {
+            chatBox.style.bottom = "-500px";
+            button.style.opacity = "1"; // Show button
         }
+    }
 
-        function sendMessage() {
-            const inputField = document.getElementById("chatInput");
-            const message = inputField.value.trim();
-            if (message === "") return;
+    function sendMessage() {
+        const inputField = document.getElementById("chatInput");
+        const message = inputField.value.trim();
+        if (message === "") return;
 
-            displayMessage(message, "user-message");
-            inputField.value = "";
+        displayMessage(message, "user-message");
+        inputField.value = "";
 
-            setTimeout(async () => {
-                const botResponse = await getBotResponse(message);
-                displayMessage(botResponse, "bot-message");
-            }, 1000);
+        setTimeout(() => {
+            showTypingIndicator();
+            setTimeout(() => {
+                hideTypingIndicator();
+                processUserMessage(message.toLowerCase());
+            }, 1500);
+        }, 500);
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            sendMessage();
         }
+    }
 
-        function handleKeyPress(event) {
-            if (event.key === "Enter") {
-                sendMessage();
-            }
+    function processUserMessage(message) {
+        if (["hi", "hello", "hey"].includes(message)) {
+            const botResponse = "Welcome to NexaHomes! 🏡💰 Your one-stop solution for Home, Personal, Car, Business, Mercenary, and Solar System Loans. Let me know how I can assist you today! 😊";
+            displayMessage(botResponse, "bot-message");
+        } else {
+            const botResponse = "Looking for financial support? 💰 Whether it's a home, personal, or business loan, we've got you covered! Welcome to NexaHomes! 🏡 Let me know how I can assist you today. 😊";
+            displayMessage(botResponse, "bot-message");
         }
+        showLoanOptions();
+    }
 
-        function displayMessage(text, className = "") {
-            const chatContent = document.getElementById("chatContent");
-            const messageDiv = document.createElement("div");
-            messageDiv.className = "chat-message " + className;
-            messageDiv.textContent = text;
-            chatContent.appendChild(messageDiv);
-            chatContent.scrollTop = chatContent.scrollHeight;
-        }
+    function showTypingIndicator() {
+        const chatContent = document.getElementById("chatContent");
+        const typingDiv = document.createElement("div");
+        typingDiv.id = "typing-indicator";
+        typingDiv.className = "chat-message bot-message";
+        typingDiv.textContent = "Typing...";
+        chatContent.appendChild(typingDiv);
+        chatContent.scrollTop = chatContent.scrollHeight;
+    }
 
-        async function getBotResponse(userInput) {
-            const useChatGPT = true; // Toggle between ChatGPT & Home Loan API
+    function hideTypingIndicator() {
+        const typingDiv = document.getElementById("typing-indicator");
+        if (typingDiv) typingDiv.remove();
+    }
 
-            if (useChatGPT) {
-                return await getChatGPTResponse(userInput);
-            } else {
-                return await getLoanInfo(userInput);
-            }
-        }
+    function showLoanOptions() {
+        const chatContent = document.getElementById("chatContent");
+        const optionsDiv = document.createElement("div");
+        optionsDiv.className = "loan-options";
 
-        async function getChatGPTResponse(userInput) {
-            const apiKey = "YOUR_OPENAI_API_KEY"; // Replace with OpenAI API key
-            const apiUrl = "https://api.openai.com/v1/chat/completions";
-
-            const requestBody = {
-                model: "gpt-3.5-turbo",
-                messages: [
-                    { role: "system", content: "You are a home loan assistant." },
-                    { role: "user", content: userInput }
-                ],
-                temperature: 0.7
-            };
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${apiKey}`
-                    },
-                    body: JSON.stringify(requestBody)
-                });
-
-                const data = await response.json();
-                return data.choices[0].message.content;
-            } catch (error) {
-                return "Sorry, I’m unable to fetch the response right now.";
-            }
-        }
-
-        async function getLoanInfo(userInput) {
-            const apiUrl = "https://your-home-loan-api.com/loan-details"; // Replace with actual API URL
-
-            try {
-                const response = await fetch(`${apiUrl}?query=${encodeURIComponent(userInput)}`);
-                const data = await response.json();
-                return data.response || "I'm sorry, I couldn't find information on that.";
-            } catch (error) {
-                return "There was an issue retrieving loan details. Please try again later.";
-            }
-        }
-
-        document.addEventListener("click", function(event) {
-            const chatBox = document.getElementById("chatBox");
-            const button = document.querySelector(".chat-button");
-            if (!chatBox.contains(event.target) && !button.contains(event.target)) {
-                chatBox.style.bottom = "-500px";
-                button.style.opacity = "1";
-            }
+        const loanTypes = ["Home Loan", "Personal Loan", "Car Loan", "Business Loan", "Mercenary Loan", "Solar System Loan", "Commercial Vehicle Loan"];
+        loanTypes.forEach(type => {
+            const button = document.createElement("button");
+            button.className = "loan-button";
+            button.textContent = type;
+            button.onclick = () => displayLoanDetails(type);
+            optionsDiv.appendChild(button);
         });
+
+        chatContent.appendChild(optionsDiv);
+        chatContent.scrollTop = chatContent.scrollHeight;
+    }
+
+    function displayLoanDetails(loanType) {
+        displayMessage(loanType, "user-message");
+        showTypingIndicator();
+
+        setTimeout(() => {
+            hideTypingIndicator();
+            const loanDetails = getLoanDescription(loanType);
+            displayMessage(loanDetails, "bot-message");
+            showActionButtons();
+        }, 1500);
+    }
+
+    function getLoanDescription(loanType) {
+        const descriptions = {
+            "Home Loan": "🏡 Buy your dream home with ease! Get low-interest rates and flexible repayment options.",
+            "Personal Loan": "💸 Need urgent funds? Our personal loans offer quick approvals with minimal paperwork.",
+            "Car Loan": "🚗 Drive home your dream car with affordable EMIs and instant loan approvals.",
+            "Business Loan": "📈 Expand your business with our flexible business loans. Fast processing & easy eligibility!",
+            "Mercenary Loan": "💼 Special loans designed for professionals and self-employed individuals to fuel your ambitions.",
+            "Solar System Loan": "🌞 Go green! Finance your solar energy system with low-cost loans and easy repayment options.",
+            "Commercial Vehicle Loan": "🚛 Get funding for trucks, vans, and commercial vehicles with easy repayment plans."
+        };
+
+        return descriptions[loanType] + " 💰 Apply online today and take the next step!";
+    }
+
+    function showActionButtons() {
+        const chatContent = document.getElementById("chatContent");
+        const buttonsDiv = document.createElement("div");
+        buttonsDiv.className = "action-buttons";
+
+        const applyButton = document.createElement("button");
+        applyButton.className = "styled-button";
+        applyButton.textContent = "Apply Online";
+        applyButton.onclick = () => window.open("details.html", "_blank");
+
+        const chatButton = document.createElement("button");
+        chatButton.className = "styled-button";
+        chatButton.textContent = "Chat with Us";
+        chatButton.onclick = () => {
+        window.location.href = "https://wa.me/9839782220";
+        };
+
+
+        buttonsDiv.appendChild(applyButton);
+        buttonsDiv.appendChild(chatButton);
+
+        chatContent.appendChild(buttonsDiv);
+        chatContent.scrollTop = chatContent.scrollHeight;
+    }
+
+    function displayMessage(text, className = "") {
+        const chatContent = document.getElementById("chatContent");
+        const messageDiv = document.createElement("div");
+        messageDiv.className = "chat-message " + className;
+        messageDiv.textContent = text;
+        chatContent.appendChild(messageDiv);
+        chatContent.scrollTop = chatContent.scrollHeight;
+    }
+
+     // Close chatbot when clicking outside
+     document.addEventListener("click", function (event) {
+        const chatBox = document.getElementById("chatBox");
+        const button = document.querySelector(".chat-button");
+
+        if (!chatBox.contains(event.target) && !button.contains(event.target)) {
+            chatBox.style.bottom = "-500px";
+            button.style.opacity = "1"; // Show chat button
+        }
+    });
+        
 
        
 
